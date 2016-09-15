@@ -1,4 +1,6 @@
 var Branch_Table = require('./models/branch_table');
+var Child = require('./models/child');
+
 
 
 
@@ -7,9 +9,8 @@ module.exports = function (app) {
     // api ---------------------------------------------------------------------
      
     // get all branches in db --------------------------------------------------
-     app.get('/api/get_branches', function(req, res) {
-        Branch_Table.find(function(err, branches) {
-
+     app.get('/api/get_clothing_children', function(req, res) {
+            Child.find(function(err, branches) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err)

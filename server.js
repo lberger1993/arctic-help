@@ -22,16 +22,14 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 
 // routes ======================================================================
 require('./app/routes.js')(app);
-require('./app/models/branch_table.js')(app);
+var Child  = require('./app/models/child');
 
-var Branch_Table = require('./app/models/branch_table.js');
 
-Branch_Table.create({
-          		name: "Entry 2", 
-          		description: "Entry", 
-          		lat: 45.5089,
-    			lng: -73.550
-        });
+// Child.create({
+//             type: "jacket", 
+//             size: "12",
+//             brand: "any",
+//            });
 
 // var all_vals = Branch_Table.find();
 // console.log(all_vals);

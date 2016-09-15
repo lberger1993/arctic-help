@@ -77,11 +77,22 @@
 	
 	var _aboutComponent2 = _interopRequireDefault(_aboutComponent);
 	
-	var _mapComponent = __webpack_require__(/*! ./common/map.component.jsx */ 287);
+	var _clothingComponent = __webpack_require__(/*! ./common/clothing.component.jsx */ 287);
+	
+	var _clothingComponent2 = _interopRequireDefault(_clothingComponent);
+	
+	var _mapComponent = __webpack_require__(/*! ./common/map.component.jsx */ 288);
 	
 	var _mapComponent2 = _interopRequireDefault(_mapComponent);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// Import routing components
+	var clothing_data = [{
+	    name: "Blah",
+	    size: "Blah",
+	    brand: "Blah"
+	}];
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
@@ -91,11 +102,10 @@
 	        { component: _mainComponent2.default },
 	        _react2.default.createElement(_reactRouter.Route, { path: "/", component: _homeComponent2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: "/about", component: _aboutComponent2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: "/clothing", component: _clothingComponent2.default, data: clothing_data }),
 	        _react2.default.createElement(_reactRouter.Route, { path: "/map", component: _mapComponent2.default })
 	    )
 	), document.getElementById('container'));
-	
-	// Import routing components
 
 /***/ },
 /* 1 */
@@ -33389,6 +33399,15 @@
 	                                    null,
 	                                    _react2.default.createElement(
 	                                        _reactRouter.Link,
+	                                        { to: '/clothing', activeClassName: 'active' },
+	                                        'Clothing Offerings '
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        _reactRouter.Link,
 	                                        { to: '/map', activeClassName: 'active' },
 	                                        ' Map Page'
 	                                    )
@@ -33453,7 +33472,7 @@
 	            return _react2.default.createElement(
 	                'h1',
 	                null,
-	                'Home Page'
+	                ' Weclome User ! '
 	            );
 	        }
 	    }]);
@@ -33505,7 +33524,7 @@
 	            return _react2.default.createElement(
 	                'h1',
 	                null,
-	                'About Page'
+	                ' Develop stuff about the compnay here '
 	            );
 	        }
 	    }]);
@@ -33517,6 +33536,75 @@
 
 /***/ },
 /* 287 */
+/*!******************************************************!*\
+  !*** ./src/client/app/common/clothing.component.jsx ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Clothing = function (_Component) {
+	    _inherits(Clothing, _Component);
+	
+	    function Clothing() {
+	        _classCallCheck(this, Clothing);
+	
+	        return _possibleConstructorReturn(this, (Clothing.__proto__ || Object.getPrototypeOf(Clothing)).apply(this, arguments));
+	    }
+	
+	    _createClass(Clothing, [{
+	        key: 'render',
+	        value: function render() {
+	            var clothing_data = this.props.route.data;
+	
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    ' Clothing table goes here  '
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    ' Children  '
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    ' Adult  '
+	                ),
+	                _react2.default.createElement('li', { key: clothing_data.name })
+	            );
+	        }
+	    }]);
+	
+	    return Clothing;
+	}(_react.Component);
+	
+	exports.default = Clothing;
+
+/***/ },
+/* 288 */
 /*!*************************************************!*\
   !*** ./src/client/app/common/map.component.jsx ***!
   \*************************************************/
