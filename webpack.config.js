@@ -1,24 +1,22 @@
-var webpack = require('webpack');
+/* eslint-disable no-var */
 var path = require('path');
+var webpack = require('webpack');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'src/client/app');
-
-var config = {
-  entry: APP_DIR + '/index.jsx',
+module.exports = {
+  entry: [
+    './src/js/app'
+  ],
+  devtool: 'eval-source-map',
   output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js'
-  }, 
-   module : {
-    loaders : [
-      {
-        test : /\.jsx?/,
-        include : APP_DIR,
-        loader : 'babel'
-      }
-    ]
+    path: __dirname,
+    filename: 'app.js',
+    publicPath: '/js/'
+  },
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'src/js')
+    }]
   }
 };
-
-module.exports = config;

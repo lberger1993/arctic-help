@@ -1,45 +1,65 @@
-var Branch_Table = require('./models/branch_table');
-var Child = require('./models/child');
 
-
-
+var newUser = require('./models/user');
+var bodyParser = require('body-parser');
+var stormpath = require('express-stormpath');
+var path = require('path');
 
 module.exports = function (app) {
-
+    
+    function failAndExit(err) {
+     console.error(err.stack);
+     process.exit(1);
+    }
     // api ---------------------------------------------------------------------
      
     // get all branches in db --------------------------------------------------
-     app.get('/api/get_clothing_children', function(req, res) {
-            Child.find(function(err, branches) {
-            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-            if (err)
-                res.send(err)
-            res.json(branches); // return all todos in JSON format
-        });
+    app.post('/me', bodyParser.json(), stormpath.loginRequired, function (req, res) {
+    function writeError(message) {
+    res.status(400);
+    res.json({ message: message, status: 400 });
+    res.end();
+  }
+
+  function saveAccount() {
+ 
+    console.log("AM I HEERE?")
+    req.user.givenName = req.body.givenName;
+    req.user.surname = req.body.surname;
+    req.user.email = req.body.email;
+    if ('zipcode' in req.body.customData){
+      req.user.customData.zipcode = req.body.customData.zipcode;
+    }
+
+    req.user.save(function (err) {
+      if (err) {
+        return writeError(err.userMessage || err.message);
+      }
+      console.log(res.user);
+      res.end();
     });
+  }
 
+  if (req.body.password) {
+    var application = req.app.get('stormpathApplication');
+    application.authenticateAccount({
+      username: req.user.username,
+      password: req.body.existingPassword
+    }, function (err) {
+      if (err) {
+        return writeError('The existing password that you entered was incorrect.');
+      }
 
-    app.post('/api/add_branch', function (req, res) {
-       
-        // Creates a user with email 
-        
-        // need to convert zip code to lat long 
-        console.log("Will convert here");
+      req.user.password = req.body.password;
 
-        // Branch_Table.create({
-        //     email_address: req.body.email_address
-        // }, function (err, todo) {
-        //     if (err)
-        //         res.send(err);
-        //     // get and return all the todos after you create another
-            
-        // });
-
+      saveAccount();
     });
+  } else {
+    saveAccount();
+  }
+});
 
 
-    // application -------------------------------------------------------------
-    app.get('*', function (req, res) {
-        res.sendFile(__dirname + '/src/client/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-    });
+app.on('error', failAndExit);
+app.on('stormpath.error', failAndExit);
+
 };

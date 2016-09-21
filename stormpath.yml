@@ -1,0 +1,6 @@
+client:
+  apiKey:
+    id: 4WFNHV0X4K8G0VQW6PLN70QXU
+    secret: cA3WjPB6ka8Ewb39ppVR7/wHPRoppfxb8RU4qmIOhe0
+application:
+  href: https://api.stormpath.com/v1/applications/17weDYkcMEgd04ZjLtoYYP
